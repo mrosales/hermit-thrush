@@ -1,0 +1,75 @@
+body {
+/*		background-color: #00AACC;
+*/}
+#thrushWrapper 
+{ 
+	width: 600px; 
+	height: 600px; 
+	border: 1px solid #000; 
+	position: relative; 
+	margin: auto;
+}
+
+.ht { width: 40px; height: 40px; position: absolute; background: #e74c3c; border-radius:20px;
+	text-align: center;
+	line-height: 40px;
+	z-index: 1;
+}
+
+.thrush {
+	background-image: url('hermit_thrush.png');
+	background-repeat:no-repeat;
+	background-position:right top;
+	height: 50px;
+	width: 41px;
+	margin-left: 280px;
+	margin-top:275px;
+	z-index: 100;
+	/*position: absolute;*/
+}
+
+
+
+/*
+.ht  {
+	position: absolute;
+
+}
+
+hta {
+	margin-left: 100;
+	margin-top:10;
+}
+htb {
+	margin-left: 130;
+	margin-top:30;
+}
+htc {
+	margin-left: 140;
+	margin-top:50;
+}
+htd {
+	margin-left: 140;
+	margin-top:70;
+}
+hte {
+	margin-left: 130;
+	margin-top:90;
+}
+htf {
+	margin-left: 100;
+	margin-top:110;
+}
+htg {
+	margin-left: 70;
+	margin-top:90;
+}
+hth {
+	margin-left: 60;
+	margin-top:70;
+}
+hti {
+	margin-left: 70;
+	margin-top:50;
+
+}*/

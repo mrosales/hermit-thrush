@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</head>
+<body>
+	<audio class='htaudio' id="htsounda" src="audio/hta.mp3" preload="auto">
+		Your browser does not support the <code>audio</code> element.
+	</audio>
+	<audio class='htaudio' id="htsoundb" src="audio/htb.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsoundc" src="audio/htc.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsoundd" src="audio/htd.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsounde" src="audio/hte.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsoundf" src="audio/htf.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsoundg" src="audio/htg.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsoundh" src="audio/hth.mp3" preload="auto"></audio>
+	<audio class='htaudio' id="htsoundi" src="audio/hti.mp3" preload="auto"></audio>
+
+
+	<link rel="stylesheet" href="style.css">
+
+	<div id="thrushWrapper">	
+		<div class="thrush">
+		</div>
+	</div>
+	
+
+
+	<script type="text/javascript">
+
+		var history = [];
+		var transitions = {
+			"a": [
+			0,
+			0.5,
+			0,
+			0,
+			0,
+			0,
+			0.5,
+			0,
+			0
+			],
+			"b": [
+			0.066667,
+			0,
+			0.4,
+			0,
+			0.4666667,
+			0,
+			0,
+			0.066667,
+			0
+			],
+			"c": [
+			0.1,
+			0,
+			0,
+			0.35,
+			0,
+			0.3,
+			0,
+			0.25,
+			0
+			],
+			"d": [
+			0.066667,
+			0,
+			0.3333333,
+			0,
+			0.46666667,
+			0.066667,
+			0,
+			0,
+			0.066667
+			],
+			"e": [
+			0.15,
+			0,
+			0,
+			0.25,
+			0,
+			0.35,
+			0.05,
+			0.2,
+			0
+			],
+			"f": [
+			0,
+			0.29411765,
+			0,
+			0,
+			0,
+			0,
+			0.70588235,
+			0,
+			0
+			],
+			"g": [
+			0,
+			0,
+			0.4,
+			0.1,
+			0.25,
+			0,
+			0,
+			0.25,
+			0
+			],
+			"h": [
+			0,
+			0,
+			0,
+			0,
+			0.066667,
+			0,
+			0,
+			0,
+			0.933333
+			],
+			"i": [
+			0.5,
+			0.21428571,
+			0,
+			0,
+			0,
+			0.21428571,
+			0.07142857,
+			0,
+			0
+			]
+		};
+
+		function reset_colors () {
+			$('.ht').each(function(){
+				$(this).css({'background-color':'#e74c3c'});
+			});
+		}
+
+		function animate_bird(new_song) {
+			var song_element = $('#ht' + new_song);
+			var bird = $('.thrush');
+
+			var radius = 150;
+			var index = new_song.charCodeAt(0) - 'a'.charCodeAt(0);
+			var fields = $('.ht'), container = $('#thrushWrapper'),
+			width = container.width(), height = container.height(),
+			angle = 0, step = (2*Math.PI) / fields.length;
+			angle += index * step;
+
+			var x = Math.round(width/2 + radius * Math.cos(angle) - bird.width()/2);
+			var y = Math.round(height/2 + radius * Math.sin(angle) - bird.height()/2);
+
+
+			bird.animate({'margin-top': y, 'margin-left': x}, 500, function () {
+				console.log('done!');
+			});
+
+		}
+
+		function play_single_song(letter) {
+			$('.htaudio').each(function(index, val) {
+				/* iterate through array or object */
+				val.pause();
+			});
+
+			reset_colors();
+
+			prevLetter = history[history.length - 1];
+			$('#ht' + prevLetter).css({'background-color': '#f1c40f'});
+			prevLetter = history[history.length - 2];
+			$('#ht' + prevLetter).css({'background-color': '#e67e22'});
+
+			history.push(letter);
+
+			$('#ht' + letter).css({'background-color': '#27ae60'});
+
+			console.log(history);
+
+			animate_bird(letter);
+			document.getElementById('htsound' + letter ).play();
+		}
+
+		function get_next_song(currentSong) {
+			var nextLetter, song_transitions = transitions[currentSong];
+			console.log("transitions: " + song_transitions);
+			var rand = Math.random();
+			var last_nonzero = 'a';
+			for (var i = 0; i < song_transitions.length; i++) {
+				if (rand < song_transitions[i]) {
+					return String.fromCharCode(97 + i);
+				} else {
+					if(song_transitions[i] > 0) last_nonzero = String.fromCharCode(97 + i);
+					rand -= song_transitions[i];
+				}
+			}
+			return last_nonzero;
+		}
+
+		function play_next_song(currentSong) {
+			var newSong = get_next_song(currentSong);
+
+			// nextLetter = String.fromCharCode(97 + Math.floor((Math.random()*9)) );
+			play_single_song(newSong);
+		}
+
+		function createFields() {
+			$('.ht').remove();
+			var container = $('#thrushWrapper');
+			for(var i = 0; i < 9; i++) {
+				var letter = String.fromCharCode(97 + i);
+				var newDiv = $('<div/>', {
+					'class': 'ht',
+					'id' : 'ht' + letter,
+					'text' : letter.toUpperCase(),
+				});
+				// newDiv.append($('<span>', {'text' : letter}));
+				newDiv.css({
+						'z-index': 1,
+				});
+				newDiv.appendTo(container);
+				$('#' + 'ht' + letter).data('song', { songletter: letter });
+
+			}
+		}
+
+	
+
+		function distributeFields() {
+			var radius = 200;
+			var fields = $('.ht'), container = $('#thrushWrapper'),
+			width = container.width(), height = container.height(),
+			angle = 0, step = (2*Math.PI) / fields.length;
+			fields.each(function() {
+				var x = Math.round(width/2 + radius * Math.cos(angle) - $(this).width()/2);
+				var y = Math.round(height/2 + radius * Math.sin(angle) - $(this).height()/2);
+				if(window.console) {
+					console.log($(this).text(), x, y);
+				}
+				$(this).css({
+					left: x + 'px',
+					top: y + 'px'
+				});
+				angle += step;
+			});
+		}
+
+		$( document ).ready(function() {
+			createFields();
+			distributeFields();
+		});
+
+
+		$('#thrushWrapper').on('click', '.ht', function(e) {
+			var myData = $('#' + event.target.id).data('song');
+			var song = myData.songletter;
+			while(history.length > 0) {
+				history.pop();
+			}
+			play_single_song(song);
+		});
+
+		$(".htaudio").bind('ended', function(event){
+		// done playing
+		currentSong = event.target.id.substring(7); 
+		play_next_song(currentSong);
+			// alert("Player stopped");
+		});
+
+
+
+
+	</script>
+
+</body>
+</html>
