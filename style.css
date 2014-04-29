@@ -119,4 +119,14 @@ body {
 	margin: auto;
 }
 
+#matrix-probabilities {
+	background-image: url('images/matrix-probabilities.png');
+	background-repeat:no-repeat;
+	background-size: cover;
+	border-radius: 2px;
+	height: 215px;
+	width: 500px;
+	margin: auto;
+}
+
 

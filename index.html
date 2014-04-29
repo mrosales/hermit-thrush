@@ -30,18 +30,60 @@
 
 	<link rel="stylesheet" href="style.css">
 	<div class="animationWrapper">
-	<div id="thrushWrapper">
-		<div class="thrush"></div>
-	</div>
+		<div id="thrushWrapper">
+			<div class="thrush"></div>
+		</div>
 	</div>
 
 	<div id="bottomWrapper">
 		<div id="analysis">
-			<h2>Betweenness Centrality</h2>
-			<div id="gephi-centrality"></div>
 
-			<h2>Probability Transition Matrix</h2>
-			<div id="graph-probabilities"></div>
+			<h3>Probability Transition Graph</h3>
+			<figure>
+				<div id="graph-probabilities"></div>
+				<figcaption>Diagram showing transition probabilities from each birdsong</figcaption>
+			</figure>
+			<p>
+				Our group set out to attempt to make sense of the bird song of the Hermit Thrush (Catharus guttatus). What songs does the Hermit Thrush sing? Are some songs more likely to be sung than others? What can the prevalence of a song tell us about its importance to the Hermit Thrush?
+			</p>
+			<p>
+				To perform an analysis of the songs of the Hermit Thrush, we culled data on the frequency of songs from Donald Kroodsma's monumental work <i>The Singing Life of Birds: The Art and Science of Listening to Birdsong</i>. First, we used the data to create a probability transition matrix, which displays the probability one song will follow each song that was just sung. Next, we imported this data into Gephi, open-source software for analyzing and visualizing networks, and performed a betweenness centrality analysis. Betweenness centrality analyses show the centrality and connectedness of a node in a network by measuring the number of shortest paths between all nodes that pass through that node. In the case of the network of Hermit Thrush songs, a betweenness centrality analysis allows us to extrapolate the importance of each song to the Thrush, and therefore hypothesize the meaning behind a particular song.
+			</p>
+			<h3>Probability Transition Matrix</h3>
+			<figure>
+				<div id="matrix-probabilities"></div>
+				<figcaption>Matrix showing transition probabilities from each birdsong to each other song. Blank cells are 0.</figcaption>
+			</figure>
+			<p>
+				With this data collected, we can determine patterns among the Hermit Thrush's repertoire.  Songs G, B and E were sung the most, and F was sung the least.  By following the matrix, the sequences sung the most goes as follows: 
+				<blockquote>H->I->A->B->E->F->G->C->D->E->F </blockquote>and so forth, and <blockquote>H->I->A->G->C->D->E->F->G 
+				</blockquote> and so forth.  
+			</p>
+			<p>
+				We can also see that the Hermit Thrush never repeats itself; A never follows A, B never follows B, and so forth.  This observation correlates with Kroodsma's suggestion that the Hermit Thrush sings a pattern in which the next song will be very different from the one it just sung.  Specifically, it chooses songs based on pitch and frequency.  On average the difference between two successive songs is 1,720 Hz.  The Hermit Thrush's song, for example, will start with a high frequency and then drop to a low frequency only to move back to a high frequency and drop again, and so forth.  Never does the Hermit Thrush sing two low frequency or two high frequency songs back to back.  This data shows that the Hermit Thrush keeps its songs interesting by ensuring no similar songs are ever sung successively.  Vocalizing an interesting song is crucial for mating in birds because they are trying to get a female's attention, and when there are hundreds of Hermit Thrushes looking for a mate they must do something unique to stand out from the crowd and keep their audience interested.  By having drastic variations in frequency, the Hermit Thrush is attempting to attract a potential mate.
+			</p>
+
+			<h3>Betweenness Centrality</h3>
+			<figure>
+				<div id="gephi-centrality"></div>
+				<figcaption>A gephi display highlighting the betweenness centrality and page rank for the birdsongs.</figcaption>
+			</figure>
+			<p>
+			With each new generation of birds, songbirds often slightly alter their songs.  For example, they may change the probabilities of their song repertoire by singing specific songs more frequently than their ancestors.  Sometimes birds even alter the content of a song by changing a note or adding more trills, but rarely do they alter it so much that it is unrecognizable from the original.  Typically, there are a few songs that are never changed and always remain the most popular songs throughout generations.  These songs are the most important ones in a bird's repertoire because they either deliver crucial information or are perceived as one of the bird's better songs that do not need to be changed.  These songs cannot be removed or altered because they are essential to a bird's message either about mating or territory.  Other songs that exist between these major ones serve as artistic elements that are meant to catch other birds' attention.  However, they deliver little to no important information, so they can easily be changed or removed from the repertoire.
+			</p>
+			<p> 
+				For the Hermit Thrush, our data shows that songs G, B and E, which were sung the most, are the most important parts to the Hermit Thrush's repertoire.  As generations pass, these songs will likely remain vital to a Hermit Thrush's repertoire and their content will barely change.  Other songs, however, serve as artistic elements that will likely disappear or change with each new generation.
+				So far we only have the data for one Hermit Thrush's song pattern, but if we had data from Hermit Thrushes of different generations we could further research this topic.  By comparing probabilities of song between these different birds, we could determine which songs are sung the most (and thus are the most important ones), which are changed, and how they change them.
+			</p>
+
+			<h3>Conclusion</h3>
+			<p>
+				Our data shows that the Hermit Thrush does not simply sing songs at random, but has developed a predictable pattern between songs.  By further analyzing this pattern, we can see that the Hermit Thrush keeps its song interesting by never repeating itself and alternating between songs of high and low frequency.  This strategy is essential for communication as it allows the Hermit Thrush to be distinct from other sounds of the forest and the songs of its competitors.
+				For further research, we could use the same procedure as used on the Hermit Thrush and use it on Hermit Thrushes of different generations or on birds of different species.  Our results, and future results, will show that birds are making strategic and artistic decisions about their songs.  This study and studies like it may bring future researchers closer to discovering how birds learn and change songs, and this information can easily be applied to humans' learning process.
+			</p>
+			<h3>Citation:</h3>
+
+			Kroodsma, Donald E. <i>The Singing Life of Birds: The Art and Science of Listening to Birdsong.</i> Boston: Houghton Mifflin, 2005. Print.
 		</div>
 	</div>
 
@@ -236,7 +278,7 @@
 				});
 				// newDiv.append($('<span>', {'text' : letter}));
 				newDiv.css({
-						'z-index': 1,
+					'z-index': 1,
 				});
 				newDiv.appendTo(container);
 				$('#' + 'ht' + letter).data('song', { songletter: letter });
@@ -244,7 +286,7 @@
 			}
 		}
 
-	
+
 
 		function distributeFields() {
 			var radius = 200;
