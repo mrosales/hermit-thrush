@@ -7,8 +7,17 @@
 
 </head>
 <body>
+	<div class="header">
+		<h1>Our Gifted Thrush</h1>
+		<h3>
+			AMTH 160 Final Project by: Micah Rosales, Myles Garberini, Megan Brink, David Hergenroeder and Matthew Jaffe
+		</h3>
+	</div>
+
 	<audio class='htaudio' id="htsounda" src="audio/hta.mp3" preload="auto">
-		Your browser does not support the <code>audio</code> element.
+		Your browser does not support the
+		<code>audio</code>
+		element.
 	</audio>
 	<audio class='htaudio' id="htsoundb" src="audio/htb.mp3" preload="auto"></audio>
 	<audio class='htaudio' id="htsoundc" src="audio/htc.mp3" preload="auto"></audio>
@@ -19,14 +28,22 @@
 	<audio class='htaudio' id="htsoundh" src="audio/hth.mp3" preload="auto"></audio>
 	<audio class='htaudio' id="htsoundi" src="audio/hti.mp3" preload="auto"></audio>
 
-
 	<link rel="stylesheet" href="style.css">
+	<div class="animationWrapper">
+	<div id="thrushWrapper">
+		<div class="thrush"></div>
+	</div>
+	</div>
 
-	<div id="thrushWrapper">	
-		<div class="thrush">
+	<div id="bottomWrapper">
+		<div id="analysis">
+			<h2>Betweenness Centrality</h2>
+			<div id="gephi-centrality"></div>
+
+			<h2>Probability Transition Matrix</h2>
+			<div id="graph-probabilities"></div>
 		</div>
 	</div>
-	
 
 
 	<script type="text/javascript">
