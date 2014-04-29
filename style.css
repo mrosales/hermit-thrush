@@ -128,5 +128,12 @@ body {
 	width: 500px;
 	margin: auto;
 }
+p {
+	text-indent: 1.5em;
+}
+figcaption {
+	text-align: center;
+	font-style:italic
+}
 
 
